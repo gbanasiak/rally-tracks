@@ -7,6 +7,9 @@
 {% set p_num_query_workflows = p_query_workflows | length %}
 {% set num_corpus = 18 %}
 {% set p_bulk_indexing_clients = (bulk_indexing_clients | default(8)) %}
+{% set p_ccs_queries_default = (ccs_queries_default | default(true)) %}
+{% set p_ccs_queries_no_minimize_roundtrips = (ccs_queries_no_minimize_roundtrips | default(true)) %}
+{% set p_ccs_queries_field_caps = (ccs_queries_field_caps | default(true)) %}
 {% set p_initial_indices_count = (initial_indices_count | default(0)) %}
 {% set p_initial_frozen_indices_count = (initial_frozen_indices_count | default(0)) %}
 {% set p_bulk_size = bulk_size | default(1000) %}
