@@ -76,7 +76,7 @@
         {
           "operation": "scroll",
           "warmup-iterations": 100,
-          "iterations": 2000,
+          "iterations": 600,
           "#COMMENT": "Throughput is considered per request. So we issue one scroll request per second which will retrieve 25 pages",
           "target-throughput": 1
         },
