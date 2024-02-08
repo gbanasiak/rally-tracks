@@ -71,8 +71,8 @@
     {
       "name": "knn-search-10-50-java",
       "operation": "knn-search-10-50-java",
-      "warmup-iterations": 100,
-      "iterations": 100,
+      "warmup-iterations": 200,
+      "iterations": 200,
       "clients": 1
     },
     {
