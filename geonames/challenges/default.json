@@ -339,16 +339,23 @@
         {% endif %}
         {
           "operation": "term",
-          "warmup-iterations": 30000,
-          "iterations": 5000{% if p_include_target_throughput %},
+          "warmup-iterations": 20000,
+          "iterations": 1000{% if p_include_target_throughput %},
           "target-throughput": 100
           {%- endif %}
         },
         {
+          "operation": "large_terms",
+          "warmup-iterations": 20000,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 5
+          {%- endif %}
+        },
+        {
           "operation": "desc_sort_with_after_geonameid",
-          "warmup-iterations": 30000,
-          "iterations": 5000{% if p_include_target_throughput %},
-          "target-throughput": 25
+          "warmup-iterations": 20000,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 10
           {%- endif %}
         }
       ]
