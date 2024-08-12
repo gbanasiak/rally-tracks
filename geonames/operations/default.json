@@ -352,6 +352,7 @@
     {
       "name": "desc_sort_with_after_geonameid",
       "operation-type": "search",
+      "detailed-results": {{detailed_results | default(false)}},
       "body": {
         "track_total_hits": false,
         "query": {
