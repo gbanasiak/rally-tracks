@@ -346,9 +346,9 @@
         },
         {
           "operation": "large_terms",
-          "warmup-iterations": 20000,
+          "warmup-iterations": 8000,
           "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 5
+          "target-throughput": 2
           {%- endif %}
         },
         {
