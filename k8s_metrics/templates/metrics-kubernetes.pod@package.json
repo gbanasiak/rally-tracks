@@ -2,7 +2,6 @@
   "name": "metrics-kubernetes.pod@package",
   "component_template": {
     "template": {
-      "lifecycle": {},
       "settings": {
         "index": {
           "codec": "best_compression",
