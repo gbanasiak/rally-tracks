@@ -2,7 +2,9 @@
   "name": "metrics-kubernetes.pod@custom",
   "component_template": {
     "template": {
-      "lifecycle": {},
+      "lifecycle": {
+        "name": "kubernetes-pod-metrics"
+      },
       "settings": {
         "index": {
           {# non-serverless-index-settings-marker-start #}{%- if build_flavor != "serverless" or serverless_operator == true -%}

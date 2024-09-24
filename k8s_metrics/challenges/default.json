@@ -23,6 +23,12 @@
       }
     },
     {
+      "operation": "delete-ilm-policy"
+    },
+    {
+      "operation": "create-ilm-policy"
+    },
+    {
       "name": "create-track-component-templates",
       "operation": {
         "operation-type": "create-component-template"

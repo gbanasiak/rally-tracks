@@ -12,18 +12,54 @@
 },
 {
   "name": "bulk-index-metrics-with-refresh",
-    "operation-type": "bulk",
-    "bulk-size": {{bulk_size | default(1000)}},
-    "corpora": "kubernetes-pod-metrics",
-    "ingest-percentage": {{ingest_percentage | default(100)}},
-    "refresh": "{{bulk_refresh | default('true')}}"
+  "operation-type": "bulk",
+  "bulk-size": {{bulk_size | default(1000)}},
+  "corpora": "kubernetes-pod-metrics",
+  "ingest-percentage": {{ingest_percentage | default(100)}},
+  "refresh": "{{bulk_refresh | default('true')}}",
+  "looped": true
+},
+{
+  "name": "create-ilm-policy",
+  "operation-type": "create-ilm-policy",
+  "policy-name": "kubernetes-pod-metrics",
+  "body": {
+    "policy": {
+      "phases": {
+        "hot": {
+          "actions": {
+            "rollover" : {
+              "max_age": "15m"
+            }
+          }
+        },
+        "warm": {
+          "min_age": "1h",
+          "actions": {
+            "readonly": {}
+          }
+        },
+        "delete": {
+          "min_age": "2d",
+          "actions": {
+            "delete": {}
+          }
+        }
+      }
+    }
+  }
+},
+{
+  "name": "delete-ilm-policy",
+  "operation-type": "delete-ilm-policy",
+  "policy-name": "kubernetes-pod-metrics"
 },
 {
   "name": "fast-refresh-index",
-    "operation-type": "bulk",
-    "bulk-size": {{fast_refresh_bulk_size | default(15)}},
-    "corpora": "k8s-integration",
-    "include-in-reporting": true
+  "operation-type": "bulk",
+  "bulk-size": {{fast_refresh_bulk_size | default(15)}},
+  "corpora": "k8s-integration",
+  "include-in-reporting": true
 },
 {
   "name": "intermittent-manual-refresh",
