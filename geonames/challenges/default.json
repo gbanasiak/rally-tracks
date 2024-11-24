@@ -499,6 +499,48 @@
           }
         }
         {% endif %}
+        {% if store_snapshot | default('false') %},
+          {
+            "name": "register-snapshot-repository",
+            "operation": {
+              "operation-type": "create-snapshot-repository",
+              "repository": "test-repository",
+              "body": {
+                "type": "s3",
+                "settings": {
+                  "bucket": "grzegorz-eu-west-1",
+                  "client": "default",
+                  "base_path": "geonames",
+                  "max_snapshot_bytes_per_sec": -1,
+                  "readonly": false
+                }
+              }
+            }
+          },
+          {
+            "name": "create-test-snapshot",
+            "operation": {
+              "operation-type": "create-snapshot",
+              "repository": "test-repository",
+              "snapshot": "test-snapshot",
+              "wait-for-completion": false,
+              "body": {
+                "indices": "geonames",
+                "ignore_unavailable": true,
+                "include_global_state": false,
+              },
+              "include-in-reporting": true
+            }
+          },
+          {
+            "name": "wait-for-test-snapshot",
+            "operation": {
+              "operation-type": "wait-for-snapshot-create",
+              "snapshot": "test-snapshot",
+              "repository": "test-repository"
+            }
+          }
+        {% endif %}
       ]
     },
     {
