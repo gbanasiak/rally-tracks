@@ -282,60 +282,113 @@
         {
           "operation": "delete-index"
         },
-        {
-          "operation": {
-            "operation-type": "create-index",
-            "settings": {{index_settings | default({}) | tojson}}
-          }
-        },
-        {
-          "name": "check-cluster-health",
-          "operation": {
-            "operation-type": "cluster-health",
-            "index": "geonames",
-            "request-params": {
-              "wait_for_status": "{{cluster_health | default('green')}}",
-              "wait_for_no_relocating_shards": "true"
-            },
-            "retry-until-success": true
-          }
-        },
-        {
-          "operation": "index-append",
-          "warmup-time-period": 70,
-          "clients": {{bulk_indexing_clients | default(8)}},
-          "ignore-response-error-level": "{{error_level | default('non-fatal')}}"
-        },
-        {
-          "name": "refresh-after-index",
-          "operation": "refresh"
-        },
-        {% if p_include_force_merge %}
-        {
-          "operation": {
-            "operation-type": "force-merge",
-            "request-timeout": 7200{%- if max_num_segments is defined %},
-            "max-num-segments": {{max_num_segments}}
-             {%- endif %}
-          }
-        },
-        {
-          "name": "refresh-after-force-merge",
-          "operation": "refresh"
-        },
-        {
-          "name": "wait-until-merges-finish",
-          "operation": {
-            "operation-type": "index-stats",
-            "index": "_all",
-            "condition": {
-              "path": "_all.total.merges.current",
-              "expected-value": 0
-            },
-            "retry-until-success": true,
-            "include-in-reporting": false
-          }
-        },
+        {% if restore_snapshot | default('false') %}
+          {
+            "name": "register-snapshot-repository",
+            "operation": {
+              "operation-type": "create-snapshot-repository",
+              "repository": "test-repository",
+              "body": {
+                "type": "s3",
+                "settings": {
+                  "bucket": "es-perf-grzegorz-eu-west-1",
+                  "client": "default",
+                  "base_path": "geonames",
+                  "max_snapshot_bytes_per_sec": -1,
+                  "readonly": true
+                }
+              }
+            }
+          },
+          {
+            "name": "recover-test-snapshot",
+            "operation": {
+              "operation-type": "restore-snapshot",
+              "repository": "test-repository",
+              "snapshot": "test-snapshot",
+              "wait-for-completion": false,
+              "body": {
+                "indices": "geonames",
+                "ignore_unavailable": true,
+                "include_global_state": false
+              }
+            }
+          },
+          {
+            "name": "wait-for-snapshot-recovery",
+            "operation": {
+              "operation-type": "wait-for-recovery",
+              "index": "geonames"
+            }
+          },
+          {
+            "name": "check-cluster-health",
+            "operation": {
+              "operation-type": "cluster-health",
+              "index": "geonames",
+              "request-params": {
+                "wait_for_status": "{{cluster_health | default('green')}}",
+                "wait_for_no_relocating_shards": "true"
+              },
+              "retry-until-success": true
+            }
+          },
+        {% else %}
+          {
+            "operation": {
+              "operation-type": "create-index",
+              "settings": {{index_settings | default({}) | tojson}}
+            }
+          },
+          {
+            "name": "check-cluster-health",
+            "operation": {
+              "operation-type": "cluster-health",
+              "index": "geonames",
+              "request-params": {
+                "wait_for_status": "{{cluster_health | default('green')}}",
+                "wait_for_no_relocating_shards": "true"
+              },
+              "retry-until-success": true
+            }
+          },
+          {
+            "operation": "index-append",
+            "warmup-time-period": 70,
+            "clients": {{bulk_indexing_clients | default(8)}},
+            "ignore-response-error-level": "{{error_level | default('non-fatal')}}"
+          },
+          {
+            "name": "refresh-after-index",
+            "operation": "refresh"
+          },
+          {% if p_include_force_merge %}
+          {
+            "operation": {
+              "operation-type": "force-merge",
+              "request-timeout": 7200{%- if max_num_segments is defined %},
+              "max-num-segments": {{max_num_segments}}
+              {%- endif %}
+            }
+          },
+          {
+            "name": "refresh-after-force-merge",
+            "operation": "refresh"
+          },
+          {
+            "name": "wait-until-merges-finish",
+            "operation": {
+              "operation-type": "index-stats",
+              "index": "_all",
+              "condition": {
+                "path": "_all.total.merges.current",
+                "expected-value": 0
+              },
+              "retry-until-success": true,
+              "include-in-reporting": false
+            }
+          },
+          {% endif %}
         {% endif %}
         {
           "operation": "term",
