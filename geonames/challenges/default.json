@@ -508,7 +508,7 @@
               "body": {
                 "type": "s3",
                 "settings": {
-                  "bucket": "grzegorz-eu-west-1",
+                  "bucket": "es-perf-grzegorz-eu-west-1",
                   "client": "default",
                   "base_path": "geonames",
                   "max_snapshot_bytes_per_sec": -1,
