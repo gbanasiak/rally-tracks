@@ -527,7 +527,7 @@
               "body": {
                 "indices": "geonames",
                 "ignore_unavailable": true,
-                "include_global_state": false,
+                "include_global_state": false
               },
               "include-in-reporting": true
             }
