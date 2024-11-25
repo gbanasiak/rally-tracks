@@ -392,16 +392,16 @@
         {% endif %}
         {
           "operation": "term",
-          "warmup-iterations": 20000,
-          "iterations": 1000
+          "warmup-iterations": {{ term_wi | default(20000) }},
+          "iterations": {{ term_i | default(1000) }}
           {% if p_include_target_throughput %},
             "target-throughput": 100
           {%- endif %}
         },
         {
           "operation": "large_terms",
-          "warmup-iterations": 20000,
-          "iterations": 1000
+          "warmup-iterations": {{ large_terms_wi | default(20000) }},
+          "iterations": {{ large_terms_i | default(1000) }}
           {% if p_include_target_throughput %},
             "target-throughput": 5
           {%- endif %}
