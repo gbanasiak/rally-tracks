@@ -13,7 +13,7 @@
               "operation-type": "create-snapshot-repository",
               "repository": "test-repository",
               "body": {
-                "type": "s3",
+                "type": "{{ repo_type | default('s3') }}",
                 "settings": {
                   "bucket": "{{ bucket_name | default('es-perf-grzegorz-eu-west-1') }}",
                   "client": "default",
@@ -342,7 +342,7 @@
               "operation-type": "create-snapshot-repository",
               "repository": "test-repository",
               "body": {
-                "type": "s3",
+                "type": "{{ repo_type | default('s3') }}",
                 "settings": {
                   "bucket": "{{ bucket_name | default('es-perf-grzegorz-eu-west-1') }}",
                   "client": "default",
@@ -615,7 +615,7 @@
               "operation-type": "create-snapshot-repository",
               "repository": "test-repository",
               "body": {
-                "type": "s3",
+                "type": "{{ repo_type | default('s3') }}",
                 "settings": {
                   "bucket": "{{ bucket_name | default('es-perf-grzegorz-eu-west-1') }}",
                   "client": "default",
