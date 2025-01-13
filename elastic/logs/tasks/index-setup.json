@@ -9,6 +9,17 @@
 },
 {%- endif %}
 {%- if lifecycle == "ilm" or (not lifecycle and build_flavor == "default") %}
+  {%- if p_ilm_policy %}
+{
+  "name": "insert-ilm",
+  "tags": ["setup"],
+  "operation": {
+    "operation-type": "create-ilm-policy",
+    "policy-name": "logs",
+    "body": {{ p_ilm_policy | tojson }}
+  }
+},
+  {%- else %}
 {
   "name": "insert-ilm",
   "tags": ["setup"],
@@ -18,6 +29,7 @@
     "policies": "{{ ilm_policies_path | default('ilm') }}"
   }
 },
+  {%- endif %}
 {%- endif %}
 {
   "name": "delete-all-datastreams",
