@@ -14,7 +14,8 @@
   "tags": ["setup"],
   "operation": {
     "operation-type": "create-ilm",
-    "param-source": "add-track-path"
+    "param-source": "add-track-path",
+    "policies": "{{ ilm_policies_path | default('ilm') }}"
   }
 },
 {%- endif %}
