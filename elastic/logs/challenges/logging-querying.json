@@ -21,7 +21,11 @@
         },
         "clients": {{ p_bulk_indexing_clients }},
         "ignore-response-error-level": "{{error_level | default('non-fatal')}}"
-      }
+      },
+      {
+        "name": "check-cluster-health-after-write",
+        "operation": "check-cluster-health-on-local-cluster"
+      },
       {%- if force_merge_max_num_segments is defined %},
       {
         "name": "refresh-after-index",
