@@ -25,7 +25,7 @@
       {
         "name": "check-cluster-health-after-write",
         "operation": "check-cluster-health-on-local-cluster"
-      },
+      }
       {%- if force_merge_max_num_segments is defined %},
       {
         "name": "refresh-after-index",
