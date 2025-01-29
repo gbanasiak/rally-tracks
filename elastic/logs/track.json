@@ -43,6 +43,7 @@
 {% set p_esql_ccs_local_nodes_count = (esql_ccs_local_nodes_count | default(0)) %}
 {% set p_esql_ccs_remote_nodes_count = (esql_ccs_remote_nodes_count | default(0)) %}
 
+{% set p_register_snapshot_repository = (register_snapshot_repository | default(false)) %}
 {% set p_snapshot_repo_name = (snapshot_repo_name | default("logging")) %}
 {% set p_snapshot_repo_type = (snapshot_repo_type | default("s3")) %}
 {% set p_snapshot_repo_settings = (snapshot_repo_settings | default({
