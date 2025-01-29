@@ -6,7 +6,6 @@
     "generate-data": {{ true | tojson if bulk_start_date and bulk_end_date else false | tojson }}
   },
   "schedule": [
-    {% include "tasks/index-setup.json" %},
     {% if p_register_snapshot_repository %}
       {
         "name": "register-snapshot-repository",
@@ -20,6 +19,7 @@
         }
       },
     {% endif %}
+    {% include "tasks/index-setup.json" %},
     {% if bulk_start_date and bulk_end_date %}
       {
         "name": "bulk-index",
