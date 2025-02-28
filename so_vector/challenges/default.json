@@ -15,29 +15,110 @@
     },
     {
       "operation": {
-        "operation-type": "cluster-health",
+        "operation-type": "cluster-health-before-ingest",
         "request-params": {
           "wait_for_status": "green"
         },
         "retry-until-success": true
       }
     },
-    {
-      "name": "index-append",
-      "operation": {
-        "operation-type": "bulk",
-        "bulk-size": {{bulk_size | default(500)}},
-        "ingest-percentage": {{ingest_percentage | default(100)}}
+    {% if do_indexing | default('true') %}
+      {
+        "name": "index-append",
+        "operation": {
+          "operation-type": "bulk",
+          "bulk-size": {{bulk_size | default(500)}},
+          "ingest-percentage": {{ingest_percentage | default(100)}}
+        },
+        "warmup-time-period": {{ bulk_warmup | default(40) | int }},
+        "clients": {{bulk_indexing_clients | default(1)}}
       },
-      "warmup-time-period": {{ bulk_warmup | default(40) | int }},
-      "clients": {{bulk_indexing_clients | default(1)}}
-    },
+      {
+        "name": "refresh-after-index",
+        "operation": {
+          "operation-type": "refresh",
+          "request-timeout": 1000,
+          "include-in-reporting": true
+        }
+      },
+    {% endif %}
+    {% if do_take_snapshot | default('false') %}
+      {
+        "name": "register-snapshot-repository",
+        "operation": {
+          "operation-type": "create-snapshot-repository",
+          "repository": "so_vector_repository",
+          "body": {
+            "type": {{ snapshot_repo_type | tojson }},
+            "settings": {{ snapshot_repo_settings | tojson(indent=2)}}
+          }
+        }
+      },
+      {
+        "name": "create-snapshot",
+        "operation": {
+          "operation-type": "create-snapshot",
+          "repository": "so_vector_repository",
+          "snapshot": {{ snapshot_name | tojson }},
+          "wait-for-completion": false,
+          "body": {
+            "indices": "vectors",
+            "ignore_unavailable": true,
+            "include_global_state": false
+          },
+          "include-in-reporting": true
+        }
+      },
+      {
+        "name": "wait-for-snapshot",
+        "operation": {
+          "operation-type": "wait-for-snapshot-create",
+          "snapshot": {{ snapshot_name | tojson }},
+          "repository": "so_vector_repository"
+        }
+      },
+    {% endif %}
+    {% if do_restore_snapshot | default('false') %}
+      {
+        "name": "register-snapshot-repository",
+        "operation": {
+          "operation-type": "create-snapshot-repository",
+          "repository": "so_vector_repository",
+          "body": {
+            "type": {{ snapshot_repo_type | tojson }},
+            "settings": {{ snapshot_repo_settings | tojson(indent=2)}}
+          }
+        }
+      },
+      {
+        "name": "recover-snapshot",
+        "operation": {
+          "operation-type": "restore-snapshot",
+          "repository": "so_vector_repository",
+          "snapshot": {{ snapshot_name | tojson }},
+          "wait-for-completion": false,
+          "body": {
+            "indices": "vectors",
+            "ignore_unavailable": true,
+            "include_global_state": false
+          }
+        }
+      },
+      {
+        "name": "wait-for-snapshot-recovery",
+        "operation": {
+          "operation-type": "wait-for-recovery",
+          "index": "vectors"
+        }
+      },
+    {% endif %}
     {
-      "name": "refresh-after-index",
       "operation": {
-        "operation-type": "refresh",
-        "request-timeout": 1000,
-        "include-in-reporting": true
+        "operation-type": "cluster-health-after-ingest",
+        "request-params": {
+          "wait_for_status": "green"
+        },
+        "retry-until-success": true
       }
     },
     {
