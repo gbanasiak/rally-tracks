@@ -1,5 +1,6 @@
 {% import "rally.helpers" as rally with context %}
 
+{% set p_corpora_uri_base = (corpora_uri_base | default("https://rally-tracks.elastic.co")) %}
 {% set p_include_force_merge = (include_force_merge | default(build_flavor != "serverless")) %}
 
 {
@@ -15,7 +16,7 @@
     {% if do_indexing | default('true') %}
       {
         "name": "so-vector",
-        "base-url": "https://rally-tracks.elastic.co/so_vector",
+        "base-url": "{{ p_corpora_uri_base }}/so_vector",
         "documents": [
           {
             "source-file": "documents.json.bz2",
@@ -28,7 +29,7 @@
     {% else %}
       {
         "name": "so-vector",
-        "base-url": "https://rally-tracks.elastic.co/so_vector",
+        "base-url": "{{ p_corpora_uri_base }}/so_vector",
         "documents": [
           {
             "source-file": "documents-1k.json.bz2",
