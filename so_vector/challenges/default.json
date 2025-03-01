@@ -23,7 +23,7 @@
         "retry-until-success": true
       }
     },
-    {% if do_indexing | default('true') %}
+    {% if do_indexing | default(true) %}
       {
         "name": "index-append",
         "operation": {
@@ -43,7 +43,7 @@
         }
       },
     {% endif %}
-    {% if do_take_snapshot | default('false') %}
+    {% if do_take_snapshot | default(false) %}
       {
         "name": "register-snapshot-repository",
         "operation": {
@@ -79,7 +79,7 @@
         }
       },
     {% endif %}
-    {% if do_restore_snapshot | default('false') %}
+    {% if do_restore_snapshot | default(false) %}
       {
         "name": "register-snapshot-repository-for-recovery",
         "operation": {
