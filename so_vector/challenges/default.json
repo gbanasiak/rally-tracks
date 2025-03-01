@@ -14,8 +14,9 @@
       }
     },
     {
+      "name": "cluster-health-before-ingest",
       "operation": {
-        "operation-type": "cluster-health-before-ingest",
+        "operation-type": "cluster-health",
         "request-params": {
           "wait_for_status": "green"
         },
@@ -113,8 +114,9 @@
       },
     {% endif %}
     {
+      "name": "cluster-health-after-ingest",
       "operation": {
-        "operation-type": "cluster-health-after-ingest",
+        "operation-type": "cluster-health",
         "request-params": {
           "wait_for_status": "green"
         },
