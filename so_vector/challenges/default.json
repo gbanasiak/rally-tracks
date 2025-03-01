@@ -81,6 +81,19 @@
     {% endif %}
     {% if do_restore_snapshot | default(false) %}
       {
+        "name": "tune-recovery-settings",
+        "operation": {
+          "operation-type": "raw-request",
+          "method": "PUT",
+          "path": "/_cluster/settings",
+          "body": {
+            "persistent": {
+              "indices.recovery.max_bytes_per_sec": "1000mb"
+            }
+          }
+        }
+      },
+      {
         "name": "register-snapshot-repository-for-recovery",
         "operation": {
           "operation-type": "create-snapshot-repository",
