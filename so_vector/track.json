@@ -25,6 +25,19 @@
           }
         ]
       }
+    {% else %}
+      {
+        "name": "so-vector",
+        "base-url": "https://rally-tracks.elastic.co/so_vector",
+        "documents": [
+          {
+            "source-file": "documents-1k.json.bz2",
+            "document-count": 1000,
+            "compressed-bytes": 6562688,
+            "uncompressed-bytes": 17102901
+          }
+        ]
+      }
     {% endif %}
   ],
   "operations": [
