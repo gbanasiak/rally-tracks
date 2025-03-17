@@ -143,7 +143,7 @@
           "operation": "painless_dynamic",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.4
+          "target-throughput": 1.1
           {%- endif %}
         },
         {
