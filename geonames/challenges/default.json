@@ -129,14 +129,14 @@
           "operation": "expression",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "target-throughput": 1.1
           {%- endif %}
         },
         {
           "operation": "painless_static",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "target-throughput": 0.8
           {%- endif %}
         },
         {
