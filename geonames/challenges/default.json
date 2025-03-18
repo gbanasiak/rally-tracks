@@ -74,203 +74,205 @@
           "operation": "index-stats",
           "warmup-iterations": 500,
           "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 90
+          "target-throughput": 202.4
           {%- endif %}
         },
         {
           "operation": "node-stats",
-          "warmup-iterations": 100,
-          "iterations": 1000
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 88.2
+          {%- endif %}
         },
         {
           "operation": "default",
           "warmup-iterations": 500,
           "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 50
+          "target-throughput": 94.8
           {%- endif %}
         },
         {
           "operation": "term",
           "warmup-iterations": 500,
           "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 100
+          "target-throughput": 127.2
           {%- endif %}
         },
         {
           "operation": "phrase",
           "warmup-iterations": 500,
           "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 110
+          "target-throughput": 70.4
           {%- endif %}
         },
         {
           "operation": "country_agg_uncached",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 3
+          "iterations": 200{% if p_include_target_throughput %},
+          "target-throughput": 4.2
           {%- endif %}
         },
         {
           "operation": "country_agg_cached",
           "warmup-iterations": 1000,
           "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 100
+          "target-throughput": 42.2
           {%- endif %}
         },
         {
           "operation": "scroll",
           "warmup-iterations": 200,
-          "iterations": 100,
+          "iterations": 200,
           "#COMMENT": "Throughput is considered per request. So we issue one scroll request per second which will retrieve 25 pages"{% if p_include_target_throughput %},
-          "target-throughput": 0.8
+          "target-throughput": 3.6
           {%- endif %}
         },
         {
           "operation": "expression",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "target-throughput": 0.9
           {%- endif %}
         },
         {
           "operation": "painless_static",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "target-throughput": 0.6
           {%- endif %}
         },
         {
           "operation": "painless_dynamic",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.4
+          "target-throughput": 0.7
           {%- endif %}
         },
         {
           "operation": "decay_geo_gauss_function_score",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1
+          "target-throughput": 1.1
           {%- endif %}
         },
         {
           "operation": "decay_geo_gauss_script_score",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1
+          "target-throughput": 1.0
           {%- endif %}
         },
         {
           "operation": "field_value_function_score",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "target-throughput": 2.9
           {%- endif %}
         },
         {
           "operation": "field_value_script_score",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "target-throughput": 1.8
           {%- endif %}
         },
         {
           "operation": "large_terms",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "iterations": 200{% if p_include_target_throughput %},
+          "target-throughput": 3.5
           {%- endif %}
         },
         {
           "operation": "large_filtered_terms",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "target-throughput": 3.2
           {%- endif %}
         },
         {
           "operation": "large_prohibited_terms",
           "warmup-iterations": 200,
           "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "target-throughput": 2.9
           {%- endif %}
         },
         {
           "operation": "desc_sort_population",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 55.8
           {%- endif %}
         },
         {
           "operation": "desc_sort_population_can_match_shortcut",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 55.7
           {%- endif %}
         },
         {
           "operation": "desc_sort_population_no_can_match_shortcut",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 59.5
           {%- endif %}
         },
 
         {
           "operation": "asc_sort_population",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "warmup-iterations": 300,
+          "iterations": 600{% if p_include_target_throughput %},
+          "target-throughput": 11.1
           {%- endif %}
         },
         {
           "operation": "asc_sort_with_after_population",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 23.9
           {%- endif %}
         },
         {
           "operation": "desc_sort_geonameid",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "warmup-iterations": 250,
+          "iterations": 500{% if p_include_target_throughput %},
+          "target-throughput": 8.8
           {%- endif %}
         },
         {
           "operation": "desc_sort_with_after_geonameid",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 21.7
           {%- endif %}
         },
         {
           "operation": "asc_sort_geonameid",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "warmup-iterations": 250,
+          "iterations": 500{% if p_include_target_throughput %},
+          "target-throughput": 8.6
           {%- endif %}
         },
         {
           "operation": "asc_sort_with_after_geonameid",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 31
           {%- endif %}
         },
         {
           "operation": "sort_country_code_can_match_shortcut",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 70.5
           {%- endif %}
         },
         {
           "operation": "sort_country_code_no_can_match_shortcut",
-          "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "warmup-iterations": 500,
+          "iterations": 1000{% if p_include_target_throughput %},
+          "target-throughput": 83.3
           {%- endif %}
         }
       ]
