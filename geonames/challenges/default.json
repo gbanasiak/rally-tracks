@@ -73,8 +73,8 @@
         {
           "operation": "index-stats",
           "warmup-iterations": 500,
-          "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 90
+          "iterations": 1000{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
@@ -85,192 +85,192 @@
         {
           "operation": "default",
           "warmup-iterations": 500,
-          "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 50
+          "iterations": 1000{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "term",
           "warmup-iterations": 500,
-          "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 100
+          "iterations": 1000{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "phrase",
           "warmup-iterations": 500,
-          "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 110
+          "iterations": 1000{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "country_agg_uncached",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 3
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "country_agg_cached",
           "warmup-iterations": 1000,
-          "iterations": 1000{% if p_include_target_throughput %},
-          "target-throughput": 100
+          "iterations": 1000{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "scroll",
           "warmup-iterations": 200,
           "iterations": 100,
-          "#COMMENT": "Throughput is considered per request. So we issue one scroll request per second which will retrieve 25 pages"{% if p_include_target_throughput %},
-          "target-throughput": 0.8
+          "#COMMENT": "Throughput is considered per request. So we issue one scroll request per second which will retrieve 25 pages"{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "expression",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "painless_static",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "painless_dynamic",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.4
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "decay_geo_gauss_function_score",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "decay_geo_gauss_script_score",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "field_value_function_score",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "field_value_script_score",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "large_terms",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "large_filtered_terms",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "large_prohibited_terms",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.1
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "desc_sort_population",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "desc_sort_population_can_match_shortcut",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "desc_sort_population_no_can_match_shortcut",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
 
         {
           "operation": "asc_sort_population",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "asc_sort_with_after_population",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "desc_sort_geonameid",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "desc_sort_with_after_geonameid",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "asc_sort_geonameid",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "asc_sort_with_after_geonameid",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "sort_country_code_can_match_shortcut",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "sort_country_code_no_can_match_shortcut",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 1.5
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         }
       ]
@@ -458,29 +458,29 @@
         {
           "operation": "significant_text_selective",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 2
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "significant_text_sampled_selective",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 20
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "significant_text_unselective",
           "warmup-iterations": 50,
-          "iterations": 20{% if p_include_target_throughput %},
-          "target-throughput": 0.04
+          "iterations": 20{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         },
         {
           "operation": "significant_text_sampled_unselective",
           "warmup-iterations": 200,
-          "iterations": 100{% if p_include_target_throughput %},
-          "target-throughput": 6
+          "iterations": 100{% if pause_interval %},
+          "pause-interval": {{ pause_interval }}
           {%- endif %}
         }
       ]

@@ -53,7 +53,7 @@ This track allows to overwrite the following parameters with Rally 0.8.0+ using 
 * `post_ingest_sleep_duration` (default: 30): Sleep duration in seconds.
 * `include_non_serverless_index_settings` (default: true for non-serverless clusters, false for serverless clusters): Whether to include non-serverless index settings.
 * `include_force_merge` (default: true for non-serverless clusters, false for serverless clusters): Whether to include force merge operation.
-* `include_target_throughput` (default: true for non-serverless clusters, false for serverless clusters): Whether to apply target throughput.
+* `pause_interval`: Extra sleep time in seconds after each search operation (none by default).
 
 ### License
 
