@@ -96,6 +96,32 @@
       {%- endif -%}{# non-serverless-index-statistics-marker-end #}
       ,
     {% endif %}
+    {% if p_register_snapshot_repository %}
+      {
+        "name": "create-snapshot",
+        "operation": {
+          "operation-type": "create-snapshot",
+          "repository": {{ p_snapshot_repo_name | tojson }},
+          "snapshot": {{ p_snapshot_name | tojson }},
+          "wait-for-completion": false,
+          "body": {
+            "indices": {{ p_restore_data_streams | tojson }},
+            "ignore_unavailable": true,
+            "include_global_state": false,
+            "metadata": {{ p_snapshot_metadata | tojson }}
+          },
+          "include-in-reporting": true
+        }
+      },
+      {
+        "name": "wait-for-snapshot",
+        "operation": {
+          "operation-type": "wait-for-snapshot-create",
+          "snapshot": {{ p_snapshot_name | tojson }},
+          "repository": {{ p_snapshot_repo_name | tojson }}
+        }
+      },
+    {% endif %}
     {
       "operation": "discovery-search-request-size-100",
       "clients": 1,
